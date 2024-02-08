@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using UserService.Data;
 using UserService.Models;
 using UserService.Dtos;
+using UserService.AuthService;
 
 namespace UserService.Controllers
 {
@@ -10,11 +11,13 @@ namespace UserService.Controllers
     [ApiController]
     public class UsersController : Controller
     {
+        private readonly IAuthService _authService;
         private readonly IMapper _mapper;
         private readonly IUserRepo _repository;
 
-        public UsersController(IUserRepo repository, IMapper mapper) 
+        public UsersController(IUserRepo repository, IMapper mapper, IAuthService authService) 
         {
+            _authService = authService;
             _mapper = mapper;
             _repository = repository;
         }
@@ -58,7 +61,7 @@ namespace UserService.Controllers
                 return Ok(_mapper.Map<IEnumerable<UserReadDto>>(users));
         }
 
-        [HttpPost]
+        [HttpPost("register")]
         public async Task<ActionResult> CreateUser(UserCreateDto userCreateDto)
         {
             Console.WriteLine("--> Creating user");
@@ -68,12 +71,50 @@ namespace UserService.Controllers
                 return BadRequest("User already exists");
 
             var userModel = _mapper.Map<User>(userCreateDto);
-            _repository.CreateUserAsync(userModel);
+
+            var passwordHash = _authService.HashPassword(userCreateDto.PasswordHash);
+            userModel.PasswordHash = passwordHash;
+            Console.WriteLine("Passwordhash" + userModel.PasswordHash);
+
+            await _repository.CreateUserAsync(userModel);
             _repository.SaveChanges();
             return Ok(_mapper.Map<UserReadDto>(userModel));
 
         }
-        
 
+        [HttpPost("login")]
+        public async Task<ActionResult> Login(UserLoginDto userLoginDto)
+        {
+            var user = await _repository.GetUserByNameAsync(userLoginDto.Username);
+            Console.WriteLine($"--> Logging in with user: {user.Username}");
+
+            if(user == null)
+                return NotFound();
+
+            var isPasswordValid = _authService.VerifyPassword(user.PasswordHash, userLoginDto.PasswordHash);
+
+            if (!isPasswordValid)
+                return Unauthorized();
+
+            var token = _authService.GenerateToken(user.Username);
+            Console.WriteLine("User successfully logged in");
+            return Ok(new { Token = token });
+        }
+
+        [HttpGet("validate")]
+        public IActionResult ValidateEndpoint()
+        {
+            string token = Request.Headers["Authorization"];
+            if (string.IsNullOrWhiteSpace(token))
+                return Unauthorized();
+
+            token = token.Substring(7);
+
+            if(!_authService.ValidateToken(token))
+                return Unauthorized();
+
+            return Ok("Successful validation");
+        }
+        
     }
 }
