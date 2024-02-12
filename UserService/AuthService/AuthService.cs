@@ -55,7 +55,7 @@ namespace UserService.AuthService
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Failed to validate token {ex.Message}");
+                Console.WriteLine($"Failed to validate token: {ex.Message}");
                 return false;
             }
         }
