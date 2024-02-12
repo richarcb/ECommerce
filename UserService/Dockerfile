@@ -4,7 +4,7 @@ WORKDIR /App
 # Copy everything
 COPY ./UserService/UserService.csproj ./
 # Restore as distinct layers
-RUN dotnet restore ./UserService/UserService.csproj
+RUN dotnet restore "UserService/UserService.csproj"
 # Build and publish a release
 RUN dotnet publish -c Release -o out
 
