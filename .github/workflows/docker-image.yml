@@ -2,7 +2,9 @@ name: UserService CI
 
 on:
   push:
-    branches: [ "main" ]
+    paths:
+      - 'UserService/**'
+    
   
 jobs:
 
