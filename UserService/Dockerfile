@@ -1,20 +1,15 @@
-FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-ARG TARGETARCH
-WORKDIR /source
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
+WORKDIR /App
 
-# copy csproj and restore as distinct layers
-COPY aspnetapp/*.csproj .
-RUN dotnet restore -a $TARGETARCH
+# Copy everything
+COPY . ./
+# Restore as distinct layers
+RUN dotnet restore
+# Build and publish a release
+RUN dotnet publish -c Release -o out
 
-# copy and publish app and libraries
-COPY aspnetapp/. .
-RUN dotnet publish -a $TARGETARCH --no-restore -o /app
-
-
-# final stage/image
+# Build runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:6.0
-EXPOSE 8080
-WORKDIR /app
-COPY --from=build /app .
-USER $APP_UID
-ENTRYPOINT ["./aspnetapp"]
+WORKDIR /App
+COPY --from=build-env /App/out .
+ENTRYPOINT ["dotnet", "UserService.dll"]
