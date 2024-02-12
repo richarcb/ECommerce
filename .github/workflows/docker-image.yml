@@ -52,5 +52,29 @@ jobs:
           file: ./UserService/Dockerfile
           push: true
           tags: rekkarten/userservice:latest
+  
+  aks-deploy:
+    needs: docker-build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Azure login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: Set AKS context
+        uses: azure/aks-set-context@v3
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          resource-group: 'rcb-test'
+          cluster-name: 'rcb-aks'
+      - name: Deploy to AKS
+        run: kubectl apply -f ./K8s/userservice-depl.yml
+        
+          
+
+
+
+    
+  
     
     
