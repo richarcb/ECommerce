@@ -97,7 +97,7 @@ namespace UserService.Controllers
                 return Unauthorized();
 
             var token = _authService.GenerateToken(user.Username);
-            Console.WriteLine("User successfully logged in");
+            Console.WriteLine("User successfully logged in.");
             return Ok(new { Token = token });
         }
 
