@@ -41,7 +41,7 @@ jobs:
       - name: Build and push docker image
         uses: docker/build-push-action@v3
         with:
-          context: .
+          context: ./UserService
           file: ./UserService/Dockerfile
           push: true
           tags: docker.io/rekkarten/userservice:latest
