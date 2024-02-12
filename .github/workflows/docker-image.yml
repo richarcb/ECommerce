@@ -44,7 +44,7 @@ jobs:
           context: ./UserService
           file: ./UserService/Dockerfile
           push: true
-          tags: docker.io/rekkarten/userservice:latest
+          tags: rekkarten/userservice:latest
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
