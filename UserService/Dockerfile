@@ -2,7 +2,7 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
 WORKDIR /App
 
 # Copy everything
-COPY ./UserService/UserService.csproj
+COPY ./UserService/UserService.csproj ./
 # Restore as distinct layers
 RUN dotnet restore ./UserService/UserService.csproj
 # Build and publish a release
