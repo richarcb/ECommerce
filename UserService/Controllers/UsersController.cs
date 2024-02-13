@@ -86,7 +86,7 @@ namespace UserService.Controllers
         public async Task<ActionResult> Login(UserLoginDto userLoginDto)
         {
             var user = await _repository.GetUserByNameAsync(userLoginDto.Username);
-            Console.WriteLine($"--> Logging in with user: {user.Username}");
+            Console.WriteLine($"--> Logging in with user {user.Username}");
 
             if(user == null)
                 return NotFound();
