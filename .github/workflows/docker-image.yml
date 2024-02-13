@@ -67,8 +67,12 @@ jobs:
         with:
           resource-group: 'rcb-test'
           cluster-name: 'rcb-aks'
+
+      - name: Checkout code 
+        uses: actions/checkout@v3
+        
       - name: Deploy to AKS
-        run: kubectl apply -f ../K8s/userservice-depl.yml
+        run: kubectl apply -f ./K8s/userservice-depl.yml
           
 
 
