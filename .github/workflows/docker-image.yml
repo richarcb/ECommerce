@@ -68,7 +68,7 @@ jobs:
           resource-group: 'rcb-test'
           cluster-name: 'rcb-aks'
       - name: Deploy to AKS
-        run: kubectl apply -f ./K8s/userservice-depl.yml
+        run: kubectl apply -f ../K8s/userservice-depl.yml
           
 
 
