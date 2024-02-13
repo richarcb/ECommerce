@@ -68,7 +68,7 @@ namespace UserService.Controllers
             var userExists = await _repository.GetUserByNameAsync(userCreateDto.Username);
             
             if(userExists != null)
-                return BadRequest("User already exists.");
+                return BadRequest("User already exists");
 
             var userModel = _mapper.Map<User>(userCreateDto);
 
