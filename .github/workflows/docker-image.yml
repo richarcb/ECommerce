@@ -71,8 +71,11 @@ jobs:
       - name: Checkout code 
         uses: actions/checkout@v3
         
-      - name: Deploy to AKS
+      - name: Deploy userservice to AKS
         run: kubectl apply -f ./K8s/userservice-depl.yaml
+        
+      - name: Deploy nodeport to AKS
+        run: kubectl apply -f ./K8s/users-np-srv.yaml
           
 
 
