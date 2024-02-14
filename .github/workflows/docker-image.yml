@@ -75,7 +75,7 @@ jobs:
         run: kubectl apply -f ./K8s/userservice-depl.yaml
         
       - name: Deploy nodeport to AKS
-        run: kubectl apply -f ./K8s/users-np-srv.yaml
+        run: kubectl apply -f ./K8s/load-balancer-users.yaml
           
 
 
