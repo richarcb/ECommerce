@@ -18,6 +18,16 @@ namespace CatalogService.Controllers
             _repository = repository;
         }
 
+        [HttpGet]
+        public ActionResult<IEnumerable<ProductReadDto>> GetProducts()
+        {
+            Console.WriteLine("--> Getting products");
+            var productItems = _repository.GetProducts();
+            if (productItems == null)
+                return NotFound();
+            return Ok(_mapper.Map<IEnumerable<ProductReadDto>>(productItems));
+        }
+
         [HttpGet("category/{categoryId}")]
         public ActionResult<IEnumerable<ProductReadDto>> GetProductsByCategory(int categoryId)
         {
@@ -40,6 +50,7 @@ namespace CatalogService.Controllers
 
             return Ok(_mapper.Map<ProductReadDto>(productItem));
         }
+
         
 
         [HttpPost("category/{categoryId}")]
@@ -55,14 +66,7 @@ namespace CatalogService.Controllers
 
             return Ok(_mapper.Map<ProductReadDto>(product));
         }
-        [HttpGet]
-        public ActionResult<IEnumerable<ProductReadDto>> GetProducts()
-        {
-            Console.WriteLine("--> Getting products");
-            var productItems = _repository.GetProducts();
-            if(productItems == null)
-                return NotFound();
-            return Ok(_mapper.Map<IEnumerable<ProductReadDto>>(productItems));
-        }
+
+        
     }
 }
