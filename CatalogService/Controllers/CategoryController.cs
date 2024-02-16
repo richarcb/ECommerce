@@ -23,7 +23,7 @@ namespace CatalogService.Controllers
         [HttpGet("{categoryId}")]
         public ActionResult<CategoryReadDto> GetCategory(int categoryId) 
         {
-            Console.WriteLine("--> Getting category by id");
+            Console.WriteLine("--> Getting category by id.");
             var categoryItem = _repository.GetCategoryById(categoryId);
             if(categoryItem == null)
                 return NotFound();
