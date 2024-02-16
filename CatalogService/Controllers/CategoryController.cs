@@ -23,6 +23,7 @@ namespace CatalogService.Controllers
         [HttpGet("{categoryId}")]
         public ActionResult<CategoryReadDto> GetCategory(int categoryId) 
         {
+            Console.WriteLine("--> Getting category by id");
             var categoryItem = _repository.GetCategoryById(categoryId);
             if(categoryItem == null)
                 return NotFound();
@@ -32,6 +33,7 @@ namespace CatalogService.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<CategoryReadDto>> GetCategories()
         {
+            Console.WriteLine("--> Getting all categories");
             var categories = _repository.GetCategories();
             if (categories == null)
                 return NotFound();
@@ -41,6 +43,7 @@ namespace CatalogService.Controllers
         [HttpPost]
         public ActionResult<CategoryReadDto> CreateCategory(CategoryCreateDto categoryCreateDto)
         {
+            Console.WriteLine("--> Creating category");
             if(categoryCreateDto == null)
                 return NotFound();
             var category = _mapper.Map<Category>(categoryCreateDto);
