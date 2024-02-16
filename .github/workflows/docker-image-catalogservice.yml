@@ -52,6 +52,7 @@ jobs:
           file: ./CatalogService/Dockerfile
           push: true
           tags: rekkarten/catalogservice:latest
+          
   aks-deploy:
     needs: docker-build
     runs-on: ubuntu-latest
