@@ -23,9 +23,9 @@ metadata:
 spec: 
     type: ClusterIP
     selector: 
-        app: catalog
+        app: catalogservice
     ports:
-      - name: catalog
+      - name: catalogservice
         protocol: TCP
         port: 80
         targetPort: 80
