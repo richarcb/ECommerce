@@ -52,3 +52,22 @@ jobs:
           file: ./CatalogService/Dockerfile
           push: true
           tags: rekkarten/catalogservice:latest
+  aks-deploy:
+    needs: docker-build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Azure login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: Set AKS context
+        uses: azure/aks-set-context@v3
+        with:
+          resource-group: 'rcb-test'
+          cluster-name: 'rcb-aks'
+
+      - name: Checkout code 
+        uses: actions/checkout@v3
+        
+      - name: Deploy userservice to AKS
+        run: kubectl apply -f ./K8s/catalogservice-depl.yaml
