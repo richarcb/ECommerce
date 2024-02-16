@@ -18,15 +18,34 @@ namespace CatalogService.Controllers
             _repository = repository;
         }
 
-        [HttpGet("{categoryId}")]
-        public ActionResult<IEnumerable<Product>> GetProductsByCategory(int categoryId)
+        [HttpGet("category/{categoryId}")]
+        public ActionResult<IEnumerable<ProductReadDto>> GetProductsByCategory(int categoryId)
         {
-            return Ok(_repository.GetProductsInCategory(categoryId));
+            Console.WriteLine("--> Getting all products in category");
+            if (!_repository.CategoryExists(categoryId))
+                return NotFound();
+            var productItems = _repository.GetProductsInCategory(categoryId);
+            if(productItems == null)
+                return NotFound();
+            return Ok(_mapper.Map<IEnumerable<ProductReadDto>>(productItems));
         }
 
-        [HttpPost("{categoryId}")]
+        [HttpGet("{productId}")]
+        public ActionResult<ProductReadDto> GetProductById(int productId)
+        {
+            Console.WriteLine("--> Getting product by Id");
+            var productItem = _repository.GetProductById(productId);
+            if(productItem == null)
+                return NotFound();
+
+            return Ok(_mapper.Map<ProductReadDto>(productItem));
+        }
+        
+
+        [HttpPost("category/{categoryId}")]
         public ActionResult<ProductReadDto> CreateProductInCategory(int categoryId, ProductCreateDto productCreateDto)
         {
+            Console.WriteLine("--> Creating product");
             if (!_repository.CategoryExists(categoryId))
                 return NotFound();
 

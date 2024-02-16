@@ -10,5 +10,7 @@ namespace CatalogService.Data
         void CreateProduct(int categoryId, Product product);
         bool CategoryExists(int categoryId);
 
+
+
     }
 }
