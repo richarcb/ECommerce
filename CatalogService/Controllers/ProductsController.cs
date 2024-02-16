@@ -55,5 +55,14 @@ namespace CatalogService.Controllers
 
             return Ok(_mapper.Map<ProductReadDto>(product));
         }
+        [HttpGet]
+        public ActionResult<IEnumerable<ProductReadDto>> GetProducts()
+        {
+            Console.WriteLine("--> Getting products");
+            var productItems = _repository.GetProducts();
+            if(productItems == null)
+                return NotFound();
+            return Ok(_mapper.Map<IEnumerable<ProductReadDto>>(productItems));
+        }
     }
 }

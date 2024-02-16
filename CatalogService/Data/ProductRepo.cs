@@ -34,6 +34,11 @@ namespace CatalogService.Data
             return _context.Products.FirstOrDefault(p => p.Id == id);
         }
 
+        public IEnumerable<Product> GetProducts()
+        {
+            return _context.Products.ToList();
+        }
+
         public IEnumerable<Product> GetProductsInCategory(int categoryId)
         {
             return _context.Products.Where(c => c.CategoryId == categoryId).ToList();
