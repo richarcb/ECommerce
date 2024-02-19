@@ -26,10 +26,9 @@ namespace CatalogService.Data
         {
             return _context.Categories.FirstOrDefault(c => c.Id == categoryId);
         }
-
-        public IEnumerable<Product> GetProductsInCategory(int categoryId)
+        public bool SaveChanges()
         {
-            return _context.Products.Where(p => p.CategoryId == categoryId).ToList();
+            return (_context.SaveChanges()) >= 0;
         }
     }
 }

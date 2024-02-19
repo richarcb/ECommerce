@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+    name: catalog-depl
+spec:
+    replicas: 1
+    selector: 
+        matchLabels: 
+            app: catalogservice
+    template: 
+        metadata:
+            labels:
+                app: catalogservice
+        spec: 
+            containers: 
+                - name: catalogservice
+                  image: docker.io/rekkarten/catalogservice
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: catalog-clusterip-srv
+spec: 
+    type: ClusterIP
+    selector: 
+        app: catalogservice
+    ports:
+      - name: catalogservice
+        protocol: TCP
+        port: 80
+        targetPort: 80

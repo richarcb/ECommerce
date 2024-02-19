@@ -9,6 +9,9 @@ namespace CatalogService.Data
         Product GetProductById(int id);
         void CreateProduct(int categoryId, Product product);
         bool CategoryExists(int categoryId);
+        IEnumerable<Product> GetProducts();
+
+
 
     }
 }

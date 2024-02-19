@@ -16,3 +16,17 @@ spec:
                 name: users-clusterip-srv
                 port:
                   number: 80
+          - path: /api/products
+            pathType: Prefix
+            backend: 
+              service:
+                name: catalog-clusterip-srv
+                port:
+                  number: 80
+          - path: /api/category
+            pathType: Prefix
+            backend: 
+              service:
+                name: catalog-clusterip-srv
+                port:
+                  number: 80

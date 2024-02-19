@@ -1,4 +1,5 @@
 ﻿using CatalogService.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace CatalogService.Data
 {
@@ -19,7 +20,7 @@ namespace CatalogService.Data
         {
             if(product == null)
                 throw new ArgumentNullException(nameof(product));
-            var category = _context.Categories.FirstOrDefault(c => c.Id == categoryId);
+            var category = _context.Categories.Include(c => c.Products).FirstOrDefault(c => c.Id == categoryId);
             if(category != null)
             {
                 category.Products.Add(product);
@@ -33,9 +34,14 @@ namespace CatalogService.Data
             return _context.Products.FirstOrDefault(p => p.Id == id);
         }
 
+        public IEnumerable<Product> GetProducts()
+        {
+            return _context.Products.ToList();
+        }
+
         public IEnumerable<Product> GetProductsInCategory(int categoryId)
         {
-            return _context.Products.Where(c => c.Id == categoryId).ToList();
+            return _context.Products.Where(c => c.CategoryId == categoryId).ToList();
         }
 
         public bool SaveChanges()

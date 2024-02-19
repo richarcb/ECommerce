@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ECommerce", "ECommerce\ECom
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserService", "UserService\UserService.csproj", "{5CA88DB2-8609-4AD2-B109-E8B79D3F507C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "K8s", "K8s\K8s.csproj", "{EA3367A1-87BA-4CF8-9977-FBA86F79AA7B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "K8s", "K8s\K8s.csproj", "{EA3367A1-87BA-4CF8-9977-FBA86F79AA7B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatalogService", "CatalogService\CatalogService.csproj", "{03A388F9-A48B-4B53-AC7E-795476C93DE0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatalogService", "CatalogService\CatalogService.csproj", "{0E8575CF-7683-4AA7-89C7-15F62BBD7D21}"
 EndProject
@@ -29,10 +31,17 @@ Global
 		{EA3367A1-87BA-4CF8-9977-FBA86F79AA7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA3367A1-87BA-4CF8-9977-FBA86F79AA7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA3367A1-87BA-4CF8-9977-FBA86F79AA7B}.Release|Any CPU.Build.0 = Release|Any CPU
+<<<<<<< HEAD
 		{0E8575CF-7683-4AA7-89C7-15F62BBD7D21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0E8575CF-7683-4AA7-89C7-15F62BBD7D21}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E8575CF-7683-4AA7-89C7-15F62BBD7D21}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0E8575CF-7683-4AA7-89C7-15F62BBD7D21}.Release|Any CPU.Build.0 = Release|Any CPU
+=======
+		{03A388F9-A48B-4B53-AC7E-795476C93DE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03A388F9-A48B-4B53-AC7E-795476C93DE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03A388F9-A48B-4B53-AC7E-795476C93DE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03A388F9-A48B-4B53-AC7E-795476C93DE0}.Release|Any CPU.Build.0 = Release|Any CPU
+>>>>>>> a8450f5dc9fc8aaa052708851ea1d1c18d379c6c
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
