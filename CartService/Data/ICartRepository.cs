@@ -4,9 +4,12 @@ namespace CartService.Data
 {
     public interface ICartRepository
     {
-        public void AddItemToCart(int userId, int productId, int quantity);
-        public void RemoveItemFromCart(int userId, int productId);
-        public Cart GetCart(string userId);
+        public Task AddItemToCart(int userId, CartItem item);
+        public void RemoveItemFromCart(int userId, int itemId);
+        public Task<Cart> GetCartAsync(int userId);
 
+        public Task<List<Cart>> GetCartsAsync();
+
+        public Task<IEnumerable<CartItem>> GetItemsInCart(int userId);
     }
 }

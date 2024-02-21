@@ -6,10 +6,7 @@ spec:
   selector:
     app: userservice
   ports:
-<<<<<<< HEAD
     - port: 30000
-=======
     - port: 8765
->>>>>>> 7808df10f7926eb363674efdaa2039555a45f639
       targetPort: 80
   type: LoadBalancer
